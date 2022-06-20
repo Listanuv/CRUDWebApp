@@ -35,7 +35,6 @@ public class UsersController {
     public String updateUserForm(@PathVariable("id") Long id, Model model){
         User user = userService.getUserById(id);
         model.addAttribute("user", user);
-        userService.deleteUserById(id);
         return "user-update";
     }
 
