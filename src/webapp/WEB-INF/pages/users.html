@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="3;">
     <title>Users</title>
 </head>
 <body>
@@ -26,12 +27,25 @@
                 <td th:text="${user.getLastName()}"></td>
                 <td th:text="${user.getAge()}"></td>
                 <td><a th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>
-                <td><a th:href="@{user-delete/{id}(id=${user.id})}">Delete</a></td>
+                <td><a href="users" th:onclick="@{'remove(' + ${user.id} + ');'}">Delete</a></td>
             </tr>
             </tbody>
         </table>
     </div>
     <p><a href="/user-create">Create user</a></p>
 </div>
+
+<script>
+    function remove(id){
+        fetch("users" + "/" + id, {
+            method: 'DELETE'
+        }).then(() => {
+            console.log('removed');
+        }).catch(err => {
+            console.error(err)
+        });
+    window.location.reload()
+    }
+</script>
 </body>
 </html>
